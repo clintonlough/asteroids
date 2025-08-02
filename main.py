@@ -17,14 +17,20 @@ def main():
     #Instantiate Player Object
     player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
 
+    #Setup groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
     #Main Game Loop
     while True:
         #Exit Criteria
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        screen.fill(color="black")
         
+        screen.fill(color="black")
+
+        player.update(dt)
         player.draw(screen)
         
         
