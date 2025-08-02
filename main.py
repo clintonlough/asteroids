@@ -14,12 +14,14 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
-    #Instantiate Player Object
-    player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
-
     #Setup groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
+    #Instantiate Player Object
+    player = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
+
 
     #Main Game Loop
     while True:
@@ -30,8 +32,10 @@ def main():
         
         screen.fill(color="black")
 
-        player.update(dt)
-        player.draw(screen)
+        updatable.update(dt)
+
+        for object in drawable:
+            object.draw(screen)
         
         
         #Screen Refresh Loop - uses dt to set 60 fps
